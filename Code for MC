@@ -1,0 +1,51 @@
+#include <Servo.h>
+#include <Wire.h>
+#include <SPI.h>
+#include <SoftwareSerial.h>
+
+// Define pins for servos, sensors, and communication modules
+const int armServoPin = 9;
+const int gripServoPin = 10;
+const int tempSensorPin = A0;
+const int gasSensorPin = A1;
+const int cameraPin = 12;
+
+Servo armServo;
+Servo gripServo;
+void setup() {
+  Serial.begin(9600);
+  
+  // Initialize servos
+  armServo.attach(armServoPin);
+  gripServo.attach(gripServoPin);
+
+  // Initialize sensors
+  pinMode(tempSensorPin, INPUT);
+  pinMode(gasSensorPin, INPUT);
+  
+  // Initialize communication
+  // Replace with actual communication module initialization
+  Serial.println("System Initialized");
+}
+void loop() {
+  // Read sensor data
+  int tempValue = analogRead(tempSensorPin);
+  int gasValue = analogRead(gasSensorPin);
+  
+  // Send data to control station
+  // Replace with actual data transmission code
+  Serial.print("Temperature: ");
+  Serial.println(tempValue);
+  Serial.print("Gas Level: ");
+  Serial.println(gasValue);
+  
+  // Control robotic arm
+  // Example: Move arm to specific position
+  armServo.write(90);  // Move arm to 90 degrees
+  delay(1000);
+  gripServo.write(45);  // Close gripper
+  delay(1000);
+  gripServo.write(0);   // Open gripper
+  
+  // Add additional control and rescue logic
+}
